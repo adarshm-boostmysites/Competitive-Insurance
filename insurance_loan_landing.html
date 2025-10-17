@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuickCover - Smart Insurance & Loans</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        .animated-bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape1 {
+            width: 300px;
+            height: 300px;
+            background: #ff6b6b;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .shape2 {
+            width: 400px;
+            height: 400px;
+            background: #4ecdc4;
+            bottom: 20%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+
+        .shape3 {
+            width: 250px;
+            height: 250px;
+            background: #ffe66d;
+            top: 50%;
+            left: 50%;
+            animation-delay: 10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 30px) scale(0.9); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            padding: 20px 0;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 60px;
+            width: auto;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ffd700;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            margin-bottom: 20px;
+            animation: fadeInUp 1s ease;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 22px;
+            margin-bottom: 40px;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: all 0.3s;
+            animation: fadeInUp 1s ease backwards;
+        }
+
+        .stat-card:nth-child(1) { animation-delay: 0.3s; }
+        .stat-card:nth-child(2) { animation-delay: 0.4s; }
+        .stat-card:nth-child(3) { animation-delay: 0.5s; }
+
+        .stat-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .stat-label {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        .ad-banner {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            border-radius: 25px;
+            padding: 40px;
+            margin: 40px auto 60px;
+            max-width: 900px;
+            box-shadow: 0 20px 60px rgba(255, 107, 107, 0.4);
+            animation: pulse 3s ease-in-out infinite;
+            border: 3px solid rgba(255, 255, 255, 0.4);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .ad-content h3 {
+            font-size: 32px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .ad-text {
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            opacity: 0.95;
+        }
+
+        .ad-highlight {
+            font-size: 28px;
+            font-weight: bold;
+            margin: 25px 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            animation: shake 0.5s ease-in-out infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .ad-solution {
+            font-size: 19px;
+            line-height: 1.7;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .trust-banner {
+            background: rgba(255, 215, 0, 0.2);
+            border-left: 5px solid #ffd700;
+            padding: 30px;
+            margin: 40px 0;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .trust-banner h4 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: #ffd700;
+        }
+
+        .trust-banner ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .trust-banner li {
+            padding: 10px 0;
+            font-size: 18px;
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .trust-banner li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #ffd700;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .form-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 50px;
+            margin: 60px auto;
+            max-width: 800px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease 0.6s backwards;
+        }
+
+        .form-section h2 {
+            color: #667eea;
+            font-size: 36px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s;
+            background: #fff;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+        }
+
+        .file-upload {
+            border: 2px dashed #667eea;
+            padding: 30px;
+            text-align: center;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #f8f9ff;
+        }
+
+        .file-upload:hover {
+            background: #f0f2ff;
+            border-color: #5568d3;
+        }
+
+        .file-upload input {
+            display: none;
+        }
+
+        .file-upload-label {
+            color: #667eea;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .features {
+            padding: 80px 0;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 42px;
+            margin-bottom: 60px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.4s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .feature-card p {
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .partners {
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .partners h3 {
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+
+        .partner-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 15px 30px;
+            border-radius: 50px;
+            margin: 10px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            background: rgba(0, 0, 0, 0.2);
+            margin-top: 60px;
+        }
+
+        .file-name {
+            margin-top: 10px;
+            color: #667eea;
+            font-size: 14px;
+        }
+
+        /* FOMO Notifications */
+        #fomo-container {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            max-width: 350px;
+        }
+
+        .fomo-notification {
+            background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            animation: slideInLeft 0.5s ease, fadeOut 0.5s ease 4.5s forwards;
+            border-left: 4px solid #667eea;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .fomo-notification:hover {
+            transform: translateX(5px);
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: translateX(-400px);
+            }
+        }
+
+        .fomo-icon {
+            font-size: 32px;
+            flex-shrink: 0;
+        }
+
+        .fomo-content {
+            flex: 1;
+        }
+
+        .fomo-content .name {
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 3px;
+        }
+
+        .fomo-content .action {
+            color: #333;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .fomo-content .time {
+            color: #999;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .fomo-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #999;
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        .fomo-close:hover {
+            background: #f0f0f0;
+            color: #333;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .form-section {
+                padding: 30px 20px;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg">
+        <div class="shape shape1"></div>
+        <div class="shape shape2"></div>
+        <div class="shape shape3"></div>
+    </div>
+
+    <header>
+        <nav class="container">
+            <div class="logo">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Cdefs%3E%3Cstyle%3E.cls-1%7Bfill:%2359b8e6;%7D.cls-2%7Bfont-size:42px;font-family:Arial-BoldMT, Arial;font-weight:700;%7D%3C/style%3E%3C/defs%3E%3Cg%3E%3Cpath class='cls-1' d='M140,150L200,50l60,100l-30,0l-30-50l-30,50z'/%3E%3Cpath d='M250,215l30,75l30-75h20l-40,85l-40-85h20z'/%3E%3Ctext class='cls-2' x='135' y='325'%3EADARSH%3C/text%3E%3Ctext class='cls-2' x='290' y='230'%3EENTURES%3C/text%3E%3C/g%3E%3C/svg%3E" alt="Adarsh Ventures">
+            </div>
+            <div class="nav-links">
+                <a href="#services">Services</a>
+                <a href="#quote">Get Quote</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Insurance & Loans Made Simple</h1>
+            <p>Minimal Paperwork • Competitive Prices • Instant Quotes</p>
+            
+            <!-- Attention-Grabbing Ad Section -->
+            <div class="ad-banner">
+                <div class="ad-content">
+                    <h3>😤 Fed Up with Insurance Companies?</h3>
+                    <p class="ad-text">Paid premiums for years but claim got rejected? Endless paperwork when you need help most? Hidden clauses you never knew about?</p>
+                    <p class="ad-highlight">✋ STOP! It's Time for a Change!</p>
+                    <p class="ad-solution">We work with 25+ trusted companies to find you the RIGHT policy - not just the cheapest. Get transparent coverage that actually pays when you need it!</p>
+                </div>
+            </div>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-number">25+</div>
+                    <div class="stat-label">Partner Companies</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">10K+</div>
+                    <div class="stat-label">Happy Customers</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Support Available</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="quote" class="form-section">
+        <h2>🚗 Get Your Best Quote Now</h2>
+        <form id="quoteForm">
+            <div class="form-group">
+                <label>Select Service Type</label>
+                <select id="serviceType" required>
+                    <option value="">Choose a service</option>
+                    <option value="car">Car Insurance</option>
+                    <option value="bike">Bike Insurance</option>
+                    <option value="loan">Personal Loan</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Vehicle Type</label>
+                <select id="vehicleType" required>
+                    <option value="">Select vehicle type</option>
+                    <option value="two-wheeler">Two Wheeler</option>
+                    <option value="four-wheeler">Four Wheeler</option>
+                    <option value="commercial">Commercial Vehicle</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Registration Number</label>
+                <input type="text" id="regNumber" placeholder="e.g., KA01AB1234" required>
+            </div>
+
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="fullName" placeholder="Enter your full name" required>
+            </div>
+
+            <div class="form-group">
+                <label>Mobile Number</label>
+                <input type="tel" id="mobile" placeholder="Enter 10-digit mobile number" pattern="[0-9]{10}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Email Address</label>
+                <input type="email" id="email" placeholder="your.email@example.com" required>
+            </div>
+
+            <div class="form-group">
+                <label>Upload RC Book</label>
+                <div class="file-upload" onclick="document.getElementById('rcBook').click()">
+                    <input type="file" id="rcBook" accept="image/*,.pdf" required>
+                    <div class="file-upload-label">📄 Click to upload RC Book</div>
+                    <div class="file-name" id="rcFileName"></div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Upload Previous Policy Copy (Optional)</label>
+                <div class="file-upload" onclick="document.getElementById('policy').click()">
+                    <input type="file" id="policy" accept="image/*,.pdf">
+                    <div class="file-upload-label">📋 Click to upload Previous Policy</div>
+                    <div class="file-name" id="policyFileName"></div>
+                </div>
+            </div>
+
+            <button type="submit" class="submit-btn">Get Competitive Quotes 🚀</button>
+        </form>
+    </section>
+
+    <section id="services" class="features">
+        <div class="container">
+            <!-- Trust Building Banner -->
+            <div class="trust-banner">
+                <h4>🛡️ Why Traditional Insurance Companies Let You Down</h4>
+                <ul>
+                    <li>Claim rejection rates as high as 30% in the industry</li>
+                    <li>Hidden policy terms revealed only during claims</li>
+                    <li>Months of follow-up for legitimate claim settlements</li>
+                    <li>Premium increases every year without better coverage</li>
+                </ul>
+                <p style="margin-top: 20px; font-size: 20px; font-weight: bold;">💡 At Adarsh Ventures, we compare 25+ insurers to find policies with the BEST claim settlement ratios!</p>
+            </div>
+
+            <h2>Why Choose Adarsh Ventures?</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Instant Processing</h3>
+                    <p>Get quotes from 25+ companies in minutes. No waiting, no hassle.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Best Prices</h3>
+                    <p>Compare and choose from the most competitive rates in the market.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📄</div>
+                    <h3>Minimal Paperwork</h3>
+                    <p>Simple digital process. Upload documents and you're done.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🛡️</div>
+                    <h3>Comprehensive Coverage</h3>
+                    <p>Car, bike insurance and personal loans - all in one place.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🤝</div>
+                    <h3>Trusted Partners</h3>
+                    <p>Partnered with India's leading insurance providers.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📞</div>
+                    <h3>24/7 Support</h3>
+                    <p>Our team is always ready to assist you with any queries.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="partners">
+        <div class="container">
+            <h3>Trusted by 25+ Leading Companies</h3>
+            <div>
+                <span class="partner-badge">HDFC ERGO</span>
+                <span class="partner-badge">ICICI Lombard</span>
+                <span class="partner-badge">Bajaj Allianz</span>
+                <span class="partner-badge">Tata AIG</span>
+                <span class="partner-badge">SBI General</span>
+                <span class="partner-badge">& 20 More Partners</span>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <p>&copy; 2025 Adarsh Ventures. All rights reserved.</p>
+            <p>Email: adarshmdys@gmail.com | Phone: 8660766388</p>
+        </div>
+    </footer>
+
+    <!-- FOMO Notifications -->
+    <div id="fomo-container"></div>
+
+    <script>
+        document.getElementById('rcBook').addEventListener('change', function(e) {
+            const fileName = e.target.files[0]?.name || '';
+            document.getElementById('rcFileName').textContent = fileName ? '✓ ' + fileName : '';
+        });
+
+        document.getElementById('policy').addEventListener('change', function(e) {
+            const fileName = e.target.files[0]?.name || '';
+            document.getElementById('policyFileName').textContent = fileName ? '✓ ' + fileName : '';
+        });
+
+        document.getElementById('quoteForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                serviceType: document.getElementById('serviceType').value,
+                vehicleType: document.getElementById('vehicleType').value,
+                regNumber: document.getElementById('regNumber').value,
+                fullName: document.getElementById('fullName').value,
+                mobile: document.getElementById('mobile').value,
+                email: document.getElementById('email').value,
+                rcBook: document.getElementById('rcBook').files[0],
+                policy: document.getElementById('policy').files[0]
+            };
+            
+            // Create message for WhatsApp
+            let message = `🚗 *New Quote Request - Adarsh Ventures*\n\n`;
+            message += `*Service Type:* ${formData.serviceType}\n`;
+            message += `*Vehicle Type:* ${formData.vehicleType}\n`;
+            message += `*Registration Number:* ${formData.regNumber}\n`;
+            message += `*Full Name:* ${formData.fullName}\n`;
+            message += `*Mobile:* ${formData.mobile}\n`;
+            message += `*Email:* ${formData.email}\n`;
+            message += `*RC Book:* ${formData.rcBook ? formData.rcBook.name : 'Not uploaded'}\n`;
+            message += `*Previous Policy:* ${formData.policy ? formData.policy.name : 'Not uploaded'}\n\n`;
+            message += `_Note: Documents need to be sent separately as WhatsApp Web doesn't support file uploads from forms._`;
+            
+            // Encode message for URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // WhatsApp API link
+            const whatsappURL = `https://wa.me/918660766388?text=${encodedMessage}`;
+            
+            // Show success message
+            alert('📱 Redirecting to WhatsApp...\n\nPlease send the RC Book and Policy documents after the chat opens.\n\nOur team will respond with competitive quotes within 24 hours!');
+            
+            // Open WhatsApp
+            window.open(whatsappURL, '_blank');
+            
+            // Reset form
+            this.reset();
+            document.getElementById('rcFileName').textContent = '';
+            document.getElementById('policyFileName').textContent = '';
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        // FOMO Notifications
+        const fomoMessages = [
+            { icon: '✍️', name: 'Rajesh Kumar from Bangalore', action: 'just submitted a car insurance proposal', type: 'proposal' },
+            { icon: '🎯', name: 'Priya Sharma from Mumbai', action: 'submitted a bike insurance proposal', type: 'proposal' },
+            { icon: '📝', name: 'Amit Patel from Pune', action: 'just submitted a personal loan application', type: 'proposal' },
+            { icon: '🤝', name: 'Sneha Reddy from Hyderabad', action: 'referred 3 friends and earned rewards', type: 'referral' },
+            { icon: '⭐', name: 'Vikram Singh from Delhi', action: 'referred 2 family members', type: 'referral' },
+            { icon: '✅', name: 'Meera Iyer from Chennai', action: 'completed car insurance proposal', type: 'proposal' },
+            { icon: '🎁', name: 'Rahul Mehta from Ahmedabad', action: 'referred 5 people this month', type: 'referral' },
+            { icon: '📋', name: 'Deepa Nair from Kochi', action: 'submitted bike insurance renewal', type: 'proposal' },
+            { icon: '💼', name: 'Arjun Desai from Surat', action: 'just applied for personal loan', type: 'proposal' },
+            { icon: '🌟', name: 'Kavya Menon from Coimbatore', action: 'referred 4 colleagues today', type: 'referral' },
+            { icon: '✏️', name: 'Sanjay Gupta from Jaipur', action: 'submitted commercial vehicle proposal', type: 'proposal' },
+            { icon: '🎊', name: 'Ritu Verma from Lucknow', action: 'referred 3 neighbors', type: 'referral' },
+            { icon: '📄', name: 'Karthik Raj from Mysore', action: 'completed insurance proposal', type: 'proposal' },
+            { icon: '👥', name: 'Ananya Bose from Kolkata', action: 'referred 6 friends this week', type: 'referral' },
+            { icon: '🚗', name: 'Manoj Tiwari from Bhopal', action: 'submitted car insurance proposal', type: 'proposal' }
+        ];
+
+        let usedIndices = new Set();
+        const fomoContainer = document.getElementById('fomo-container');
+
+        function getRandomUnusedMessage() {
+            // Reset if all messages have been used
+            if (usedIndices.size >= fomoMessages.length) {
+                usedIndices.clear();
+            }
+            
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * fomoMessages.length);
+            } while (usedIndices.has(randomIndex));
+            
+            usedIndices.add(randomIndex);
+            return fomoMessages[randomIndex];
+        }
+
+        function showFomoNotification() {
+            const message = getRandomUnusedMessage();
+            
+            const notification = document.createElement('div');
+            notification.className = 'fomo-notification';
+            notification.innerHTML = `
+                <div class="fomo-icon">${message.icon}</div>
+                <div class="fomo-content">
+                    <div class="name">${message.name}</div>
+                    <div class="action">${message.action}</div>
+                    <div class="time">Just now</div>
+                </div>
+                <button class="fomo-close" onclick="this.parentElement.remove()">×</button>
+            `;
+            
+            fomoContainer.appendChild(notification);
+            
+            // Auto remove after 6 seconds
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.remove();
+                }
+            }, 6000);
+        }
+
+        // Show first notification after 4 seconds
+        setTimeout(showFomoNotification, 4000);
+        
+        // Then show new notification every 10 seconds
+        setInterval(showFomoNotification, 10000);
+    </script>
+</body>
+</html>
